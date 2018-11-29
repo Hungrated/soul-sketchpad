@@ -71,7 +71,9 @@ a {
 
 .g-in .m-canvas {
     margin: 22px 0;
-    box-shadow: 2px 2px 10px #999999;
+    box-shadow: 2px 2px 15px #999999;
+    background: #ffffff;
+    cursor: crosshair;
 }
 
 .g-footer {
