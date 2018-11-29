@@ -17,6 +17,11 @@ iframe, img {
     outline: none;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .g-header {
     position: absolute;
     top: 0;
@@ -46,6 +51,10 @@ iframe, img {
     height: 45px;
     line-height: 45px;
     padding-left: 15px;
+}
+
+.g-header .m-tools .item {
+    cursor: pointer;
 }
 
 .g-main {

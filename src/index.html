@@ -8,19 +8,15 @@
 <body>
 <header class="g-header">
     <div class="m-brand"><strong>Paint Board</strong></div>
-    <div class="m-tools">
-        <span class="item item1">1</span>
-        <span class="item item2">2</span>
-        <span class="item item3">3</span>
-        <span class="item item4">4</span>
-        <span class="item item5">5</span>
+    <div class="m-tools J_tools">
+        <span class="item item1 J_choose">选择图片：<input id="file" type="file"></span>
+        <span class="item item2"><a class="J_redraw" href="javascript:;">重新绘图</a></span>
+        <span class="item item3"><a class="J_save" href="javascript:;">保存图片</a></span>
     </div>
 </header>
 <main class="g-main">
     <div class="g-in">
-        <canvas class="m-canvas" width="1090" height="680">
-
-
+        <canvas class="m-canvas J_canvas" id="canvas" width="1090" height="680">
         </canvas>
     </div>
 </main>
@@ -31,3 +27,8 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="static/index.js"></script>
 </html>
+
+
+
+
+
