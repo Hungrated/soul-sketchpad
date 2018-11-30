@@ -1,18 +1,98 @@
 $(document).ready(function () {
 
-  // 获取 canvas 对象
-  let canvas = document.getElementById('canvas');
-  // 获取绘图环境
-  let ctx = canvas.getContext('2d');
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
 
-  let last = null;
+  /**
+   *
+   */
 
-  let file = document.getElementById('file');
+  /**
+   * 撤销一步操作
+   */
+  function undo() {
 
-  // 文件对象
-  let fileData = null;
+  }
+
+  /**
+   * 重做一步操作
+   */
+  function redo() {
+
+  }
+
+  /**
+   * 重新绘图
+   */
+  function clear () {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // canvas.onmousedown=null;
+    // canvas.onmousemove=null;
+    // canvas.onmouseup=null;
+    // canvas.onmouseout=null;
+  }
+
+  /**
+   * 保存图片
+   */
+  function saveImage () {
+    let saveImg = canvas.toDataURL('image/png');
+    console.log(saveImg);
+    // document.getElementById('res').innerHTML = '<img src="' + saveImage + '">';
+  }
+
+  /**
+   * 自由画笔
+   */
+
+  function pencil() {
+
+  }
+
+  /**
+   * 橡皮擦
+   */
+  function eraser() {
+
+  }
+
+  /**
+   * 画直线
+   */
+  function line() {
+
+  }
+
+  /**
+   * 画圆
+   */
+  function circle() {
+
+  }
+
+  /**
+   * 画矩形
+   */
+  function rectangle() {
+
+  }
+
+  /**
+   * 插入文字
+   */
+  function insertText() {
+
+  }
+
+  /**
+   * 插入图片
+   */
+  function insertImage() {
+
+  }
 
   // 鼠标按下
+  let last = null;
   canvas.onmousedown = function () {
     // 在鼠标按下后触发鼠标移动事件
     canvas.onmousemove = move;
@@ -42,27 +122,17 @@ $(document).ready(function () {
   }
 
   // 当文件域内容发生改变时触发函数
-  file.onchange = function (e) {
-    fileData = e.target.files[0];
-    // 	实例化文件读取对象
-    drawImg(fileData);
-  };
-
-  function redraw () {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
+  // file.onchange = function (e) {
+  //   drawImg(e.target.files[0]);
+  // };
 
   // 绘制图片
   function drawImg (data) {
-
     if(data == null) {
       return;
     }
-
     let reader = new FileReader();
-
     reader.readAsDataURL(data);
-
     reader.onload = function () {
       let img = new Image();
       img.src = reader.result;
@@ -76,17 +146,18 @@ $(document).ready(function () {
   }
 
   // 保存图片
-  function saveImage () {
-    let saveImg = canvas.toDataURL('image/png');
-    // document.getElementById('res').innerHTML = '<img src="' + saveImage + '">';
-  }
 
-  // add listener
+  /**
+   * 添加监听事件
+   */
   $('.J_tools')
-    .on('click', '.J_redraw', function () {
-      redraw();
+    .on('click', '.J_clear', function () {
+      clear();
     })
     .on('click', '.J_save', function () {
       saveImage();
     });
+  $('.J_file').on('change', function (e) {
+    drawImg(e.target.files[0]);
+  })
 });

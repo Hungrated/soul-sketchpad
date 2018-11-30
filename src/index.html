@@ -9,9 +9,22 @@
 <header class="g-header">
     <div class="m-brand"><strong>Paint Board</strong></div>
     <div class="m-tools J_tools">
-        <span class="item item1 J_choose">选择图片：<input id="file" type="file"></span>
-        <span class="item item2"><a class="J_redraw" href="javascript:;">重新绘图</a></span>
-        <span class="item item3"><a class="J_save" href="javascript:;">保存图片</a></span>
+        <span class="item item1"><a class="J_undo" href="javascript:;">撤销</a></span>
+        <span class="item item2"><a class="J_redo" href="javascript:;">重做</a></span>
+        <span class="item item3"><a class="J_clear" href="javascript:;">重新绘图</a></span>
+        <span class="item item4"><a class="J_save" href="javascript:;">保存图片</a></span>
+        <span>&nbsp;|&nbsp;</span>
+        <span class="item item5"><a class="J_pencil" href="javascript:;">自由画笔</a></span>
+        <span class="item item6"><a class="J_eraser" href="javascript:;">橡皮擦</a></span>
+        <span>&nbsp;|&nbsp;</span>
+        <span class="item item7"><a class="J_line" href="javascript:;">画直线</a></span>
+        <span class="item item8"><a class="J_circle" href="javascript:;">画圆</a></span>
+        <span class="item item9"><a class="J_rect" href="javascript:;">画矩形</a></span>
+        <span>&nbsp;|&nbsp;</span>
+        <span class="item item10"><a class="J_text" href="javascript:;">插入文字</a></span>
+        <span class="item item11">
+            <span class="file-input">插入图片<input class="J_file" id="file" type="file"></span>
+        </span>
     </div>
 </header>
 <main class="g-main">
@@ -27,8 +40,3 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="static/index.js"></script>
 </html>
-
-
-
-
-

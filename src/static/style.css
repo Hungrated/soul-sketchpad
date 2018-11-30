@@ -1,4 +1,4 @@
-body, div, h1, h2, h3, h4, h5, h6, p, form, input, textarea, button, th, td, ul, li {
+body, div, h1, h2, h3, h4, h5, h6, p, form, input, textarea, button, th, td, ul, li, header, footer, main {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -22,6 +22,19 @@ a {
     text-decoration: none;
 }
 
+input[type=file] {
+    border: none;
+    background: none;
+    opacity: 0;
+    display: inline-block;
+    width: 64px;
+    height: 22px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
 .g-header {
     position: absolute;
     top: 0;
@@ -33,10 +46,16 @@ a {
     background: #c2cdd6;
     box-shadow: 0 1px 10px #c2cdd6;
     user-select: none;
+    text-align: center;
+    padding: 0 160px;
+    font-size: 16px;
 }
 
 .g-header .m-brand {
     display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
     padding: 0 20px;
     vertical-align: top;
     height: 45px;
@@ -47,13 +66,17 @@ a {
 .g-header .m-tools {
     display: inline-block;
     vertical-align: top;
-    width: 600px;
+    min-width: 600px;
     height: 45px;
     line-height: 45px;
-    padding-left: 15px;
 }
 
 .g-header .m-tools .item {
+    cursor: pointer;
+}
+
+.g-header .m-tools .item .file-input {
+    position: relative;
     cursor: pointer;
 }
 
