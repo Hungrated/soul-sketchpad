@@ -90,12 +90,22 @@ input[type=file] {
     width: 1090px;
     margin: 0 auto;
     font-size: 0;
+    padding: 22px 0;
 }
 
 .g-in .m-canvas {
-    margin: 22px 0;
     box-shadow: 2px 2px 15px #999999;
     background: #ffffff;
+    position: relative;
+}
+
+.g-in .m-canvas .primary {
+}
+
+.g-in .m-canvas .secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
     cursor: crosshair;
 }
 
