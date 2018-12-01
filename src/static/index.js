@@ -91,7 +91,27 @@ $(document).ready(function () {
    */
   function eraser () {
     clearState();
-
+    let eraseFlag = false;
+    canvas2.onmousedown = function () {
+      eraseFlag = true;
+    };
+    canvas2.onmousemove = function (e) {
+      e = e || window.event;
+      ctx.beginPath();
+      clearSecondaryPaint();
+      ctx2.strokeRect(e.offsetX - 8, e.offsetY - 8, 16, 16);
+      ctx2.closePath();
+      if (eraseFlag) {
+        ctx.clearRect(e.offsetX - 8, e.offsetY - 8, 16, 16);
+      }
+    };
+    canvas2.onmouseup = function () {
+      eraseFlag = false;
+    };
+    canvas2.onmouseout = function () {
+      clearSecondaryPaint();
+      eraseFlag = false;
+    };
   }
 
   /**
@@ -268,6 +288,9 @@ $(document).ready(function () {
   $('.J_tools')
     .on('click', '.J_pencil', function () {
       pencil();
+    })
+    .on('click', '.J_eraser', function () {
+      eraser();
     })
     .on('click', '.J_line', function () {
       line();
