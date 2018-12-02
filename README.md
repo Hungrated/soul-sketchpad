@@ -1,3 +1,5 @@
-# Web Paintboard Demo
+# Soul Sketchpad
 
-A paint board program based on HTML5 & Canvas.
+A web sketchpad of soul, based on HTML5 & Canvas.
+
+![demo](./doc/demo.png)
