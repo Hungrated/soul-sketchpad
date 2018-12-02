@@ -5,18 +5,57 @@ $(document).ready(function () {
   const ctx = canvas.getContext('2d');
   const ctx2 = canvas2.getContext('2d');
 
+  const MAX_STACK_SIZE = 50;
+  let history;
+  let step;
+
+  /**
+   * 进行绘图操作
+   */
+  function fDraw () {
+    step++;
+    if (step < history.length) {
+      history.length = step; // 截断数组
+    }
+    history.push(canvas.toDataURL());
+    if (history.length > MAX_STACK_SIZE) {
+      history = history.slice(1);
+      step--;
+    }
+  }
+
   /**
    * 撤销一步操作
    */
-  function undo () {
-
+  function fUndo () {
+    if (step > 0) {
+      step--;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let canvasPic = new Image();
+      canvasPic.src = history[step];
+      canvasPic.addEventListener('load', () => {
+        ctx.drawImage(canvasPic, 0, 0);
+      });
+    } else {
+      alert('已为最早状态');
+    }
   }
 
   /**
    * 重做一步操作
    */
-  function redo () {
-
+  function fRedo () {
+    if (step < history.length - 1) {
+      step++;
+      let canvasPic = new Image();
+      canvasPic.src = history[step];
+      canvasPic.addEventListener('load', () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(canvasPic, 0, 0);
+      });
+    } else {
+      alert('画板已为最新');
+    }
   }
 
   /**
@@ -25,6 +64,7 @@ $(document).ready(function () {
   function clearPaint () {
     clearSecondaryPaint();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    fDraw();
   }
 
   /**
@@ -84,6 +124,7 @@ $(document).ready(function () {
     canvas2.onmouseup = function () {
       canvas2.onmousemove = null;
       last = null;
+      fDraw();
     };
     canvas2.onmouseout = function () {
       canvas2.onmousemove = null;
@@ -112,6 +153,7 @@ $(document).ready(function () {
     };
     canvas2.onmouseup = function () {
       eraseFlag = false;
+      fDraw();
     };
     canvas2.onmouseout = function () {
       clearSecondaryPaint();
@@ -150,6 +192,7 @@ $(document).ready(function () {
       clearSecondaryPaint();
       canvas2.onmousemove = null;
       start = null;
+      fDraw();
     };
     canvas2.onmouseout = function () {
       canvas2.onmousemove = null;
@@ -196,6 +239,7 @@ $(document).ready(function () {
       clearSecondaryPaint();
       canvas2.onmousemove = null;
       start = null;
+      fDraw();
     };
     canvas2.onmouseout = function () {
       canvas2.onmousemove = null;
@@ -242,6 +286,7 @@ $(document).ready(function () {
       clearSecondaryPaint();
       canvas2.onmousemove = null;
       start = null;
+      fDraw();
     };
     canvas2.onmouseout = function () {
       canvas2.onmousemove = null;
@@ -274,6 +319,7 @@ $(document).ready(function () {
         moveFlag = false;
         text = null;
       }
+      fDraw();
     };
     canvas2.onmouseout = function () {
       clearSecondaryPaint();
@@ -302,6 +348,7 @@ $(document).ready(function () {
         ctx.drawImage(img, 0, 0, canvas.width, canvas.width / aspectRatio);
       };
     };
+    fDraw();
   }
 
   /**
@@ -309,6 +356,12 @@ $(document).ready(function () {
    */
   function listen () {
     $('.J_tools')
+      .on('click', '.J_undo', function () {
+        fUndo();
+      })
+      .on('click', '.J_redo', function () {
+        fRedo();
+      })
       .on('click', '.J_pencil', function () {
         pencil();
       })
@@ -350,6 +403,9 @@ $(document).ready(function () {
   function init () {
     listen();
     pencil();
+    history = [];
+    step = -1;
+    fDraw();
   }
 
   init();
