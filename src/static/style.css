@@ -73,6 +73,11 @@ input[type=file] {
 
 .g-header .m-tools .item {
     cursor: pointer;
+    transition: all 200ms;
+}
+
+.g-header .m-tools .item:hover {
+    opacity: 0.8;
 }
 
 .g-header .m-tools .item .file-input {

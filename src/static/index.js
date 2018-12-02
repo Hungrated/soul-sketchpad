@@ -249,14 +249,31 @@ $(document).ready(function () {
    */
   function insertText () {
     clearState();
-
-  }
-
-  /**
-   * 插入图片
-   */
-  function insertImage () {
-
+    let moveFlag = false;
+    let text = null;
+    canvas2.onmousemove = function (e) {
+      e = e || window.event;
+      if (text) {
+        clearSecondaryPaint();
+        ctx2.fillText(text, e.offsetX, e.offsetY);
+      }
+    };
+    canvas2.onmouseup = function (e) {
+      e = e || window.event;
+      if(!moveFlag && !text) {
+        moveFlag = true;
+        text = window.prompt('请输入文字', '');
+      } else {
+        ctx.fillText(text, e.offsetX, e.offsetY);
+        clearSecondaryPaint();
+        moveFlag = false;
+        text = null;
+      }
+    };
+    canvas2.onmouseout = function () {
+      clearSecondaryPaint();
+      moveFlag = false;
+    };
   }
 
   /**
@@ -277,7 +294,7 @@ $(document).ready(function () {
         let aspectRatio = img.width / img.height;
         img.width = canvas.width;
         img.height = img.width * aspectRatio;
-        ctx.drawImage(img, 0, 0);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.width / aspectRatio);
       };
     };
   }
@@ -285,29 +302,51 @@ $(document).ready(function () {
   /**
    * 添加监听事件
    */
-  $('.J_tools')
-    .on('click', '.J_pencil', function () {
-      pencil();
-    })
-    .on('click', '.J_eraser', function () {
-      eraser();
-    })
-    .on('click', '.J_line', function () {
-      line();
-    })
-    .on('click', '.J_circle', function () {
-      circle(false);
-    })
-    .on('click', '.J_rect', function () {
-      rectangle(false);
-    })
-    .on('click', '.J_clear', function () {
-      clearPaint();
-    })
-    .on('click', '.J_save', function () {
-      saveImage();
+  function listen () {
+    $('.J_tools')
+      .on('click', '.J_pencil', function () {
+        pencil();
+      })
+      .on('click', '.J_eraser', function () {
+        eraser();
+      })
+      .on('click', '.J_line', function () {
+        line();
+      })
+      .on('click', '.J_circle', function () {
+        circle();
+      })
+      .on('click', '.J_circle_fill', function () {
+        circle(true);
+      })
+      .on('click', '.J_rect', function () {
+        rectangle();
+      })
+      .on('click', '.J_rect_fill', function () {
+        rectangle(true);
+      })
+      .on('click', '.J_text', function () {
+        insertText();
+      })
+      .on('click', '.J_clear', function () {
+        clearPaint();
+      })
+      .on('click', '.J_save', function () {
+        saveImage();
+      });
+    $('.J_file').on('change', function (e) {
+      drawImg(e.target.files[0]);
     });
-  $('.J_file').on('change', function (e) {
-    drawImg(e.target.files[0]);
-  });
+  }
+
+  /**
+   * 初始化画板
+   */
+  function init () {
+    listen();
+    pencil();
+  }
+
+  init();
 });
+
