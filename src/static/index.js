@@ -52,9 +52,14 @@ $(document).ready(function () {
    * 保存图片
    */
   function saveImage () {
-    let saveImg = canvas.toDataURL('image/png');
-    console.log(saveImg);
-    // document.getElementById('res').innerHTML = '<img src="' + saveImage + '">';
+    const saveLink = $('.J_save_link')[0];
+    const event = document.createEvent('MouseEvents');
+    saveLink.href = canvas.toDataURL('image/png')
+      .replace('image/png', 'image/octet-stream');
+    saveLink.download = `webpainter_${new Date().getTime()}.png`;
+    event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false,
+      false, false, false, 0, null);
+    saveLink.dispatchEvent(event);
   }
 
   /**
@@ -260,7 +265,7 @@ $(document).ready(function () {
     };
     canvas2.onmouseup = function (e) {
       e = e || window.event;
-      if(!moveFlag && !text) {
+      if (!moveFlag && !text) {
         moveFlag = true;
         text = window.prompt('请输入文字', '');
       } else {

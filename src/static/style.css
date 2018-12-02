@@ -77,7 +77,7 @@ input[type=file] {
 }
 
 .g-header .m-tools .item:hover {
-    opacity: 0.8;
+    opacity: 0.5;
 }
 
 .g-header .m-tools .item .file-input {
