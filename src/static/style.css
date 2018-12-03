@@ -55,17 +55,20 @@ input[type=file] {
     display: inline-block;
     position: absolute;
     top: 0;
-    left: 0;
-    padding: 0 20px;
-    vertical-align: top;
+    left: 20px;
     height: 45px;
-    line-height: 45px;
+    vertical-align: top;
     text-align: center;
+}
+
+.g-header .m-brand img {
+    display: inline-block;
+    height: 100%;
+    overflow: hidden;
 }
 
 .g-header .m-tools {
     display: inline-block;
-    vertical-align: top;
     min-width: 600px;
     height: 45px;
     line-height: 45px;
@@ -74,6 +77,12 @@ input[type=file] {
 .g-header .m-tools .item {
     cursor: pointer;
     transition: all 200ms;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 0;
+    height: 45px;
+    line-height: 45px;
+    margin: 0 5px;
 }
 
 .g-header .m-tools .item:hover {
@@ -83,6 +92,17 @@ input[type=file] {
 .g-header .m-tools .item .file-input {
     position: relative;
     cursor: pointer;
+}
+
+.g-header .m-tools .item a,
+.g-header .m-tools .item span {
+    display: inline-block;
+    vertical-align: middle;
+    height: 25px;
+}
+
+.g-header .m-tools .item img {
+    height: 100%;
 }
 
 .g-main {
