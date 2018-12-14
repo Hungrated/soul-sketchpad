@@ -59,6 +59,13 @@ $(document).ready(function () {
   }
 
   /**
+   * 获取最新画布
+   */
+  function getLatestHistory() {
+    return history[step];
+  }
+
+  /**
    * 清空画布
    */
   function clearPaint () {
@@ -295,6 +302,24 @@ $(document).ready(function () {
   }
 
   /**
+   * 翻转图象
+   */
+  function flip (horizontal = true) {
+    const canvasPicTemp = getLatestHistory();
+    let canvasPicObj = new Image();
+    canvasPicObj.src = canvasPicTemp;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if(horizontal) {
+      ctx.drawImage(canvasPicObj, canvas.width, 0, -canvas.width, canvas.height);
+      // ctx.translate(canvas.width, 0);
+    } else {
+      ctx.drawImage(canvasPicObj, 0, canvas.height, canvas.width, -canvas.height);
+      // ctx.translate(0, canvas.height);
+    }
+    fDraw();
+  }
+
+  /**
    * 插入文字
    */
   function insertText () {
@@ -382,6 +407,14 @@ $(document).ready(function () {
       })
       .on('click', '.J_rect_fill', function () {
         rectangle(true);
+      })
+      .on('click', '.J_hori_flip', function () {
+        console.log('hori flip');
+        flip(true);
+      })
+      .on('click', '.J_vert_flip', function () {
+        console.log('vert flip');
+        flip(false);
       })
       .on('click', '.J_text', function () {
         insertText();
