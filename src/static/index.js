@@ -61,7 +61,7 @@ $(document).ready(function () {
   /**
    * 获取最新画布
    */
-  function getLatestHistory() {
+  function getLatestHistory () {
     return history[step];
   }
 
@@ -209,6 +209,8 @@ $(document).ready(function () {
 
   /**
    * 画圆
+   *
+   * @param fill 是否填充
    */
   function circle (fill = false) {
     clearState();
@@ -256,6 +258,8 @@ $(document).ready(function () {
 
   /**
    * 画矩形
+   *
+   * @param fill 是否填充
    */
   function rectangle (fill = false) {
     clearState();
@@ -303,20 +307,30 @@ $(document).ready(function () {
 
   /**
    * 翻转图象
+   *
+   * @param horizontal 是否水平翻转（若否则竖直翻转）
    */
   function flip (horizontal = true) {
     const canvasPicTemp = getLatestHistory();
     let canvasPicObj = new Image();
     canvasPicObj.src = canvasPicTemp;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    if(horizontal) {
-      ctx.drawImage(canvasPicObj, canvas.width, 0, -canvas.width, canvas.height);
-      // ctx.translate(canvas.width, 0);
-    } else {
-      ctx.drawImage(canvasPicObj, 0, canvas.height, canvas.width, -canvas.height);
-      // ctx.translate(0, canvas.height);
-    }
-    fDraw();
+    canvasPicObj.addEventListener('load', () => {
+      if (horizontal) {
+        ctx.translate(canvas.width, 0);
+        ctx.scale(-1, 1);
+        ctx.drawImage(canvasPicObj, 0, 0);
+        ctx.scale(-1, 1);
+        ctx.translate(-canvas.width, 0);
+      } else {
+        ctx.translate(0, canvas.height);
+        ctx.scale(1, -1);
+        ctx.drawImage(canvasPicObj, 0, 0);
+        ctx.scale(1, -1);
+        ctx.translate(0, -canvas.height);
+      }
+      fDraw();
+    });
   }
 
   /**
@@ -371,9 +385,9 @@ $(document).ready(function () {
         img.width = canvas.width;
         img.height = img.width * aspectRatio;
         ctx.drawImage(img, 0, 0, canvas.width, canvas.width / aspectRatio);
+        fDraw();
       };
     };
-    fDraw();
   }
 
   /**
@@ -409,11 +423,9 @@ $(document).ready(function () {
         rectangle(true);
       })
       .on('click', '.J_hori_flip', function () {
-        console.log('hori flip');
         flip(true);
       })
       .on('click', '.J_vert_flip', function () {
-        console.log('vert flip');
         flip(false);
       })
       .on('click', '.J_text', function () {
