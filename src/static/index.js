@@ -110,6 +110,18 @@ $(document).ready(function () {
   }
 
   /**
+   * 选择颜色
+   *
+   * @param color 指定颜色
+   */
+  function fSelectColor (color) {
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+    ctx2.strokeStyle = color;
+    ctx2.fillStyle = color;
+  }
+
+  /**
    * 自由画笔
    */
   function pencil () {
@@ -401,6 +413,12 @@ $(document).ready(function () {
       .on('click', '.J_redo', function () {
         fRedo();
       })
+      .on('click', '.J_color_select', function () {
+        $('.J_colors').show();
+      })
+      .on('click', '.J_sc_close', function () {
+        $('.J_colors').hide();
+      })
       .on('click', '.J_pencil', function () {
         pencil();
       })
@@ -439,6 +457,10 @@ $(document).ready(function () {
       });
     $('.J_file').on('change', function (e) {
       drawImg(e.target.files[0]);
+    });
+    $('.J_colors').on('click', '.J_sc', function () {
+      fSelectColor($(this).css('background-color'));
+      $('.J_colors').hide();
     });
   }
 

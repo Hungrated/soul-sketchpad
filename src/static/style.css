@@ -49,6 +49,7 @@ input[type=file] {
     text-align: center;
     padding: 0 160px;
     font-size: 16px;
+    z-index: 5;
 }
 
 .g-header .m-brand {
@@ -75,8 +76,7 @@ input[type=file] {
 }
 
 .g-header .m-tools .item {
-    cursor: pointer;
-    transition: all 200ms;
+    position: relative;
     display: inline-block;
     vertical-align: top;
     font-size: 0;
@@ -85,7 +85,12 @@ input[type=file] {
     margin: 0 5px;
 }
 
-.g-header .m-tools .item:hover {
+.g-header .m-tools .item img {
+    transition: all 200ms;
+    cursor: pointer;
+}
+
+.g-header .m-tools .item img:hover {
     opacity: 0.5;
 }
 
@@ -103,6 +108,59 @@ input[type=file] {
 
 .g-header .m-tools .item img {
     height: 100%;
+}
+
+.g-header .m-tools .item .m-colors {
+    display: none;
+    position: absolute;
+    top: 55px;
+    left: -15px;
+    background: #efefef;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px #999999;
+    width: 260px;
+    height: 45px;
+}
+
+.g-header .m-tools .item .m-colors .color-item {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    margin: 5px;
+}
+
+.g-header .m-tools .item .m-colors .color-item img {
+    height: 100%;
+}
+
+.g-header .m-tools .item .m-colors .color-item-black {
+    background: black;
+}
+
+.g-header .m-tools .item .m-colors .color-item-red {
+    background: red;
+}
+
+.g-header .m-tools .item .m-colors .color-item-green {
+    background: green;
+}
+
+.g-header .m-tools .item .m-colors .color-item-orange {
+    background: orange;
+}
+
+.g-header .m-tools .item .m-colors .color-item-blue {
+    background: blue;
+}
+
+.g-header .m-tools .item .m-colors .color-item-cyan {
+    background: cyan;
+}
+
+.g-header .m-tools .item .m-colors .color-item-white {
+    background: white;
 }
 
 .g-main {
